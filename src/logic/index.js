@@ -1,6 +1,7 @@
 import "../styles/index.styles.css";
 // import sidebar from './sidebar.js';
-import { toDos } from "./todos.js";
+
+import { Projects } from './projects.js';
 
 const body = document.querySelector("body");
 
@@ -16,18 +17,12 @@ submitButton.setAttribute("type", "submit");
 submitButton.textContent = "Submit";
 form.appendChild(submitButton);
 body.appendChild(form);
-let toDoItem = [];
+
 
 const display = document.createElement("p");
 display.classList.add("display");
 
 body.appendChild(display);
 
-function displayToDo(e) {
-  e.preventDefault();
-  toDoItem.push(new toDos(title.value));
-  toDoItem.forEach((toDo, i) => {
-    display.textContent = `${toDo.title}`;
-  });
-}
-submitButton.addEventListener("click", displayToDo);
+window.Projects = Projects;
+

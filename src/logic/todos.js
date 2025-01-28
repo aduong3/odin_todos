@@ -13,5 +13,3 @@ export class toDos {
     this.priority = priority;
   }
 }
-
-//console.log(new toDos("hello","I am greeting.","12/7/25", 'High'));
