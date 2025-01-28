@@ -1,0 +1,14 @@
+fieldset{
+    border-radius: 12px;
+    border: 1px solid lightblue;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+legend{
+color: lightblue;
+font-weight: bold;
+font-style: italic;
+font-size: 1.4rem;
+}
