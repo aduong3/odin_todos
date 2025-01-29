@@ -1,14 +1,39 @@
 fieldset{
     border-radius: 12px;
-    border: 1px solid lightblue;
+    border: 1px solid black;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
 
 legend{
-color: lightblue;
+color: black;
 font-weight: bold;
 font-style: italic;
 font-size: 1.4rem;
+}
+
+.sidebar{
+    height: 100%;
+    background-color: rgb(224, 224, 224);
+    padding: 6px 20px;
+}
+
+.todaySVG, .weekSVG{
+    width: 30px;
+}
+
+.sortByDiv{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.todayDiv, .weekDiv{
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.todayDiv:hover, .weekDiv:hover{
+    background-color: rgb(255, 165, 165);
 }
