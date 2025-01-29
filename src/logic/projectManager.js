@@ -32,7 +32,6 @@ export function printProjectNames() {
   const projectsDiv = document.querySelector(".projectsDiv");
   projectsDiv.innerHTML = "";
   projectManager.getProjectsList().forEach((project, i) => {
-    console.log(project);
     const projectNav = document.createElement("div");
     projectNav.classList.add(`projectNav`);
 

@@ -1,0 +1,30 @@
+.blackoutBG {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.281);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 12px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.315);
+}
+
+form label {
+  color: black;
+}
+
+.inputNameDiv,
+.inputColorDiv {
+  display: flex;
+  flex-direction: column;
+}

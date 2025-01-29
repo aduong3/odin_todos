@@ -1,72 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inconsolata:wght@200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inconsolata:wght@200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
-
-.sidebar{
-    height: 100svh;
-    background-color: rgb(255, 219, 219);
-    padding: 6px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: 3px 0 5px #ffbdbdbe;
-    z-index: 1;
+.sidebar {
+  height: 100svh;
+  background-color: rgb(255, 219, 219);
+  padding: 6px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 3px 0 5px #ffbdbdbe;
+  z-index: 1;
 }
 
-.webTitle{ 
-    font-family: 'Dancing Script';
-    font-size: 2.8rem;
-    padding: 12px 0;
-    align-self: center;
-    justify-self: center;
-    border-bottom: 1px solid rgb(255, 173, 173);
-    color: rgb(255, 34, 71);
+.webTitle {
+  font-family: "Dancing Script";
+  font-size: 2.8rem;
+  padding: 12px 0;
+  align-self: center;
+  justify-self: center;
+  border-bottom: 1px solid rgb(255, 173, 173);
+  color: rgb(255, 34, 71);
 }
 
-.projectsTitleDiv{
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    align-items: center;
-    gap: 12px;
+.projectsTitleDiv {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+  gap: 12px;
 }
 
-.addProjectButton{
-    justify-self: center;
-    border-radius: 12px;
-    cursor: pointer;
-    padding: 0 12px;
-    font-size: 2rem;
+.addProjectButton {
+  justify-self: center;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 0 12px;
+  font-size: 2rem;
 }
 
-.todaySVG, .weekSVG, .projectDot{
-    width: 30px;
+.todaySVG,
+.weekSVG,
+.projectDot {
+  width: 30px;
 }
 
-.sortByDiv, .projectsDiv{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: 1fr;
-    gap: 8px;
+.sortByDiv,
+.projectsDiv {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 8px;
 }
 
-.todayDiv, .weekDiv, .projectNav{
-    display: flex;
-    gap: 12px;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 12px;
-    align-items: center;
+.todayDiv,
+.weekDiv,
+.projectNav {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 12px;
+  align-items: center;
 }
 
-.todayDiv:hover, .weekDiv:hover, .projectNav:hover, .addProjectButton:hover{
-    background-color: rgb(255, 165, 165);
-    color: var(--sidebar-color);
-    fill: var(--sidebar-color);
+.todayDiv:hover,
+.weekDiv:hover,
+.projectNav:hover,
+.addProjectButton:hover {
+  background-color: rgb(255, 165, 165);
+  color: var(--sidebar-color);
+}
+.todayDiv:hover,
+.weekDiv:hover,
+.addProjectButton:hover {
+  fill: var(--sidebar-color);
 }
 
-.todayDiv p, .weekDiv p, .projectNav p{
-    font-size: 1.2rem;
-    font-weight: bold;
+.todayDiv p,
+.weekDiv p,
+.projectNav p {
+  font-size: 1.2rem;
 }
-
-
-
