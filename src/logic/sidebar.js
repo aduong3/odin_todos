@@ -6,11 +6,14 @@ export default function sidebar(){
     sidebarContainer.classList.add('sidebar');
 
 
-
-//-----------------------------------------------------GET TASKS SORTED BY DATE-------------------------------------------------
-
     const sortByDiv = document.createElement('div');
     sortByDiv.classList.add('sortByDiv');
+
+    const webTitle = document.createElement('h2');
+    webTitle.classList.add('webTitle');
+    webTitle.textContent = 'To-Doing';
+
+    sidebarContainer.appendChild(webTitle);
 
     const todayDiv = document.createElement('div');
     todayDiv.classList.add('todayDiv');
@@ -57,7 +60,26 @@ export default function sidebar(){
     sortByDiv.appendChild(todayDiv);
     sortByDiv.appendChild(weekDiv);
 
+    const projectsDiv = document.createElement('div');
+    projectsDiv.classList.add('projectsDiv');
+
+    const yourProjects = document.createElement('h2');
+    yourProjects.textContent = 'Your Projects';
+    yourProjects.classList.add('yourProjects');
+    projectsDiv.appendChild(yourProjects);
+
+    const testDivA = document.createElement('div');
+    testDivA.classList.add('testDivA');
+
+    const test = document.createElement('p');
+    test.textContent = 'someProject';
+    test.classList.add('test');
+    testDivA.appendChild(test);
+    projectsDiv.appendChild(testDivA);
+
+
     sidebarContainer.appendChild(sortByDiv);
+    sidebarContainer.appendChild(projectsDiv);
     document.body.appendChild(sidebarContainer);
 
 }
