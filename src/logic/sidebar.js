@@ -1,4 +1,5 @@
 import '../styles/sidebar.styles.css';
+import { printProjectNames } from './projectManager';
 
 export default function sidebar(){
     
@@ -63,23 +64,25 @@ export default function sidebar(){
     const projectsDiv = document.createElement('div');
     projectsDiv.classList.add('projectsDiv');
 
+    const projectsTitleDiv = document.createElement('div');
+    projectsTitleDiv.classList.add('projectsTitleDiv');
+
     const yourProjects = document.createElement('h2');
     yourProjects.textContent = 'Your Projects';
     yourProjects.classList.add('yourProjects');
-    projectsDiv.appendChild(yourProjects);
 
-    const testDivA = document.createElement('div');
-    testDivA.classList.add('testDivA');
+    const addProjectButton = document.createElement('p');
+    addProjectButton.textContent = '+';
+    addProjectButton.classList.add('addProjectButton');
+    addProjectButton.addEventListener('click', printProjectNames);
 
-    const test = document.createElement('p');
-    test.textContent = 'someProject';
-    test.classList.add('test');
-    testDivA.appendChild(test);
-    projectsDiv.appendChild(testDivA);
-
-
+    projectsTitleDiv.appendChild(yourProjects);
+    projectsTitleDiv.appendChild(addProjectButton);
+    
     sidebarContainer.appendChild(sortByDiv);
+    sidebarContainer.appendChild(projectsTitleDiv);
     sidebarContainer.appendChild(projectsDiv);
+
     document.body.appendChild(sidebarContainer);
 
 }

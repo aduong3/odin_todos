@@ -8,3 +8,4 @@ import { projectManager } from "./projectManager.js";
 sidebar();
 content();
 
+window.projectManager = projectManager;
