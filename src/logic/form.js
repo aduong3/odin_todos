@@ -2,15 +2,13 @@ import "../styles/form.styles.css";
 
 import { projectManager, printProjectNames } from "./projectManager";
 
-function handleNewProjectSubmit(e){
+function handleNewProjectSubmit(e) {
   e.preventDefault();
-  const getNameValue = document.querySelector('.projectName');
-  const getColorValue = document.querySelector('.color');
+  const getNameValue = document.querySelector(".projectName");
+  const getColorValue = document.querySelector(".color");
 
   projectManager.addProject(getNameValue.value, getColorValue.value);
-
 }
-
 
 export function addProjectForm() {
   const blackoutBackgroundDiv = document.createElement("div");
@@ -65,7 +63,14 @@ export function addProjectForm() {
   const newProjectSubmit = document.createElement("button");
   newProjectSubmit.classList.add("newProjectSubmit");
   newProjectSubmit.textContent = "Submit";
-  newProjectSubmit.addEventListener('click', (e)=> {handleNewProjectSubmit(e); printProjectNames();});
+  newProjectSubmit.addEventListener("click", (e) => {
+    if (nameInput.value.length != 0) {
+      handleNewProjectSubmit(e);
+      printProjectNames();
+    } else {
+      alert("Name is required.");
+    }
+  });
 
   form.appendChild(newProjectSubmit);
 
@@ -73,6 +78,3 @@ export function addProjectForm() {
   blackoutBackgroundDiv.appendChild(formDiv);
   document.body.appendChild(blackoutBackgroundDiv);
 }
-
-
-

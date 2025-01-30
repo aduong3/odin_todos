@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 3px 0 5px #ffbdbdbe;
+  box-shadow: 3px 0 5px #ff636371;
   z-index: 1;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .todaySVG,
-.weekSVG,
+.upcomingSVG,
 .projectDot {
   width: 30px;
 }
@@ -51,31 +51,60 @@
 }
 
 .todayDiv,
-.weekDiv,
-.projectNav {
-  display: flex;
+.upcomingDiv,
+.projectNav
+{
+  display: grid;
   gap: 12px;
   cursor: pointer;
   padding: 12px;
   border-radius: 12px;
   align-items: center;
+  grid-template-columns: 0.5fr 2fr 0.5fr;
 }
 
 .todayDiv:hover,
-.weekDiv:hover,
+.upcomingDiv:hover,
 .projectNav:hover,
 .addProjectButton:hover {
   background-color: rgb(255, 165, 165);
   color: var(--sidebar-color);
 }
 .todayDiv:hover,
-.weekDiv:hover,
+.upcomingDiv:hover,
 .addProjectButton:hover {
   fill: var(--sidebar-color);
 }
 
 .todayDiv p,
-.weekDiv p,
+.upcomingDiv p,
 .projectNav p {
   font-size: 1.2rem;
 }
+
+.todayDiv span,
+.upcomingDiv span,
+.projectNav span,
+.todayDiv svg,
+.upcomingDiv svg,
+.projectNav svg{
+  justify-self: right;
+}
+
+.menuIcon{
+  display: none;
+  width: 30px;
+}
+
+.todayDiv:hover .todayTasksNumber, .upcomingDiv:hover .upcomingTasksNumber{
+  display: none;
+}
+
+.todayDiv:hover .menuIcon, .upcomingDiv:hover .menuIcon{
+  display: inline;
+}
+
+.menuIcon:hover{
+  fill: rgb(109, 5, 5);
+}
+

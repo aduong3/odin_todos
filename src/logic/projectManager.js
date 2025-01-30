@@ -4,11 +4,11 @@ class ProjectManager {
   constructor() {
     this.projectsList = [];
 
-    const defaultProject = new Projects("Default", '#000000');
+    const defaultProject = new Projects("Default", "#000000");
     this.projectsList.push(defaultProject);
   }
 
-  addProject(projectName, color) {
+  addProject(projectName, color = "#000000") {
     if (!this.projectsList.find((project) => project.name === projectName)) {
       const newProject = new Projects(projectName, color);
       this.projectsList.push(newProject);
@@ -52,7 +52,7 @@ export function printProjectNames() {
       "M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
     );
 
-    projectDotPath.setAttribute('fill', `${project.color}`);
+    projectDotPath.setAttribute("fill", `${project.color}`);
 
     projectDot.appendChild(projectDotPath);
 
@@ -61,8 +61,13 @@ export function printProjectNames() {
     ListProjectsInDOM.textContent = project.name;
     ListProjectsInDOM.dataset.index = i;
 
+    const taskNumber = document.createElement('span');
+    taskNumber.classList.add('taskNumber');
+    taskNumber.textContent = '4';
+
     projectNav.appendChild(projectDot);
     projectNav.appendChild(ListProjectsInDOM);
+    projectNav.appendChild(taskNumber);
 
     projectsDiv.appendChild(projectNav);
   });
