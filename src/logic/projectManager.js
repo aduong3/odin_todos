@@ -4,13 +4,13 @@ class ProjectManager {
   constructor() {
     this.projectsList = [];
 
-    const defaultProject = new Projects("Default");
+    const defaultProject = new Projects("Default", '#000000');
     this.projectsList.push(defaultProject);
   }
 
-  addProject(projectName) {
+  addProject(projectName, color) {
     if (!this.projectsList.find((project) => project.name === projectName)) {
-      const newProject = new Projects(projectName);
+      const newProject = new Projects(projectName, color);
       this.projectsList.push(newProject);
     } else {
       alert(`${projectName} already exists.`);
@@ -51,6 +51,8 @@ export function printProjectNames() {
       "d",
       "M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
     );
+
+    projectDotPath.setAttribute('fill', `${project.color}`);
 
     projectDot.appendChild(projectDotPath);
 

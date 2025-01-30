@@ -2,8 +2,9 @@ import { toDos } from "./todos.js";
 
 
 export class Projects{
-    constructor(name){
+    constructor(name, color){
         this.name = name;
+        this.color = color;
         this.toDoList = [];
     }
 

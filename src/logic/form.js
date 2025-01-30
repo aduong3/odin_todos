@@ -1,6 +1,16 @@
 import "../styles/form.styles.css";
 
-import { printProjectNames } from "./projectManager";
+import { projectManager, printProjectNames } from "./projectManager";
+
+function handleNewProjectSubmit(e){
+  e.preventDefault();
+  const getNameValue = document.querySelector('.projectName');
+  const getColorValue = document.querySelector('.color');
+
+  projectManager.addProject(getNameValue.value, getColorValue.value);
+
+}
+
 
 export function addProjectForm() {
   const blackoutBackgroundDiv = document.createElement("div");
@@ -11,6 +21,15 @@ export function addProjectForm() {
       blackoutBackgroundDiv.remove();
     }
   });
+
+  const formDiv = document.createElement("div");
+  formDiv.classList.add("formDiv");
+
+  const projectFormTitle = document.createElement("h3");
+  projectFormTitle.textContent = "Add New Project";
+  projectFormTitle.classList.add("projectFormTitle");
+
+  formDiv.appendChild(projectFormTitle);
 
   const form = document.createElement("form");
   form.classList.add("projectForm");
@@ -43,6 +62,17 @@ export function addProjectForm() {
   inputColorDiv.appendChild(colorInput);
   form.appendChild(inputColorDiv);
 
-  blackoutBackgroundDiv.appendChild(form);
+  const newProjectSubmit = document.createElement("button");
+  newProjectSubmit.classList.add("newProjectSubmit");
+  newProjectSubmit.textContent = "Submit";
+  newProjectSubmit.addEventListener('click', (e)=> {handleNewProjectSubmit(e); printProjectNames();});
+
+  form.appendChild(newProjectSubmit);
+
+  formDiv.appendChild(form);
+  blackoutBackgroundDiv.appendChild(formDiv);
   document.body.appendChild(blackoutBackgroundDiv);
 }
+
+
+
