@@ -36,22 +36,32 @@ export function printProjectNames() {
     ListProjectsInDOM.textContent = project.name;
     ListProjectsInDOM.dataset.index = i;
 
-    const taskNumber = document.createElement('span');
-    taskNumber.classList.add('taskNumber');
-    taskNumber.textContent = '4';
+    const taskNumber = document.createElement("span");
+    taskNumber.classList.add("taskNumber");
+    taskNumber.textContent = projectManager
+      .getProjectByName(project.name)
+      .getToDos().length;
 
     projectNav.appendChild(projectDot);
     projectNav.appendChild(ListProjectsInDOM);
     projectNav.appendChild(taskNumber);
 
-    projectNav.addEventListener('click', () => updateContent(project.name, projectManager.getProjectByName(project.name).getToDos()));
+    projectNav.addEventListener("click", () =>
+      updateContent(
+        project.name,
+        projectManager.getProjectByName(project.name).getToDos()
+      )
+    );
 
     projectsDiv.appendChild(projectNav);
   });
 }
 
 function createMenuIcon() {
-  const menuIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const menuIcon = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
   menuIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   menuIcon.setAttribute("viewBox", "0 0 24 24");
   menuIcon.classList.add("menuIcon");
@@ -81,6 +91,30 @@ export default function sidebar() {
   webTitle.textContent = "To-Doing";
 
   sidebarContainer.appendChild(webTitle);
+
+  const addTaskDiv = document.createElement("div");
+  addTaskDiv.classList.add("addTaskDiv");
+
+  const addTaskButton = document.createElement("p");
+  addTaskButton.textContent = "Add Task";
+  addTaskButton.classList.add("addTaskButton");
+
+  //<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>note-plus</title><path d="M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z" /></svg>
+  const addTaskSVG = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  addTaskSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  addTaskSVG.setAttribute("viewBox", "0 0 24 24");
+  addTaskSVG.classList.add('addTaskSVG');
+
+  const addTaskPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  addTaskPath.setAttribute('d','M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z');
+
+  addTaskSVG.appendChild(addTaskPath);
+  addTaskDiv.appendChild(addTaskSVG);
+  addTaskDiv.appendChild(addTaskButton);
+  sidebarContainer.appendChild(addTaskDiv);
 
   const todayDiv = document.createElement("div");
   todayDiv.classList.add("todayDiv");
