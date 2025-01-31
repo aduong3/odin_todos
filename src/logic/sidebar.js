@@ -1,5 +1,54 @@
 import "../styles/sidebar.styles.css";
 import { addProjectForm } from "./Form";
+import { projectManager } from "./projectManager";
+import { updateContent } from "./content";
+
+export function printProjectNames() {
+  const projectsDiv = document.querySelector(".projectsDiv");
+  projectsDiv.innerHTML = "";
+  projectManager.getProjectsList().forEach((project, i) => {
+    const projectNav = document.createElement("div");
+    projectNav.classList.add(`projectNav`);
+
+    const projectDot = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    projectDot.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    projectDot.setAttribute("viewBox", "0 0 24 24");
+    projectDot.classList.add("projectDot");
+
+    const projectDotPath = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    projectDotPath.setAttribute(
+      "d",
+      "M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+    );
+
+    projectDotPath.setAttribute("fill", `${project.color}`);
+
+    projectDot.appendChild(projectDotPath);
+
+    const ListProjectsInDOM = document.createElement("p");
+    ListProjectsInDOM.classList.add("projectInDOM");
+    ListProjectsInDOM.textContent = project.name;
+    ListProjectsInDOM.dataset.index = i;
+
+    const taskNumber = document.createElement('span');
+    taskNumber.classList.add('taskNumber');
+    taskNumber.textContent = '4';
+
+    projectNav.appendChild(projectDot);
+    projectNav.appendChild(ListProjectsInDOM);
+    projectNav.appendChild(taskNumber);
+
+    projectNav.addEventListener('click', () => updateContent(project.name, projectManager.getProjectByName(project.name).getToDos()));
+
+    projectsDiv.appendChild(projectNav);
+  });
+}
 
 function createMenuIcon() {
   const menuIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -138,4 +187,6 @@ export default function sidebar() {
   sidebarContainer.appendChild(projectsDiv);
 
   document.body.appendChild(sidebarContainer);
+
+  printProjectNames();
 }

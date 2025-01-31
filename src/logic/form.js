@@ -1,9 +1,9 @@
 import "../styles/form.styles.css";
 
-import { projectManager, printProjectNames } from "./projectManager";
+import { projectManager } from "./projectManager";
+import { printProjectNames } from "./sidebar";
 
-function handleNewProjectSubmit(e) {
-  e.preventDefault();
+function handleNewProjectSubmit() {
   const getNameValue = document.querySelector(".projectName");
   const getColorValue = document.querySelector(".color");
 
@@ -23,11 +23,26 @@ export function addProjectForm() {
   const formDiv = document.createElement("div");
   formDiv.classList.add("formDiv");
 
+  const projectFormHeader = document.createElement("div");
+  projectFormHeader.classList.add("projectFormHeader");
+
   const projectFormTitle = document.createElement("h3");
   projectFormTitle.textContent = "Add New Project";
   projectFormTitle.classList.add("projectFormTitle");
+  projectFormHeader.appendChild(projectFormTitle);
 
-  formDiv.appendChild(projectFormTitle);
+  const projectFormExit = document.createElement("span");
+  projectFormExit.textContent = "X";
+  projectFormExit.classList.add("projectFormExit");
+  projectFormExit.addEventListener("click", (e) => {
+    //console.log("clicked background");
+    if (e.target === projectFormExit) {
+      blackoutBackgroundDiv.remove();
+    }
+  });
+  projectFormHeader.appendChild(projectFormExit);
+
+  formDiv.appendChild(projectFormHeader);
 
   const form = document.createElement("form");
   form.classList.add("projectForm");
@@ -42,8 +57,13 @@ export function addProjectForm() {
   nameInput.setAttribute("id", "projectName");
   nameInput.classList.add("projectName");
 
+  const nameError = document.createElement("span");
+  nameError.classList.add("nameError");
+  nameError.style.opacity = '0';
+
   inputNameDiv.appendChild(nameLabel);
   inputNameDiv.appendChild(nameInput);
+  inputNameDiv.appendChild(nameError);
   form.appendChild(inputNameDiv);
 
   const inputColorDiv = document.createElement("div");
@@ -64,11 +84,16 @@ export function addProjectForm() {
   newProjectSubmit.classList.add("newProjectSubmit");
   newProjectSubmit.textContent = "Submit";
   newProjectSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
     if (nameInput.value.length != 0) {
-      handleNewProjectSubmit(e);
+      handleNewProjectSubmit();
       printProjectNames();
+      nameError.style.opacity = '0';
+      nameInput.value = '';
+      colorInput.value = '#000000';
     } else {
-      alert("Name is required.");
+      nameError.style.opacity = '1';
+      nameError.textContent = "Name is required.";
     }
   });
 

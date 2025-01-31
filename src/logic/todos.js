@@ -5,7 +5,7 @@ export class toDos {
     title = "testTitle",
     description = "testDesc",
     dueDate = "testDate",
-    priority = "high"
+    priority = "High"
   ) {
     this.title = title;
     this.description = description;
