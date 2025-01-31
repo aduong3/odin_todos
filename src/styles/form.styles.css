@@ -44,7 +44,7 @@ form label {
   color: red;
 }
 
-.projectFormHeader{
+.formHeader{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,7 +52,7 @@ form label {
   padding-bottom: 16px;
 }
 
-.newProjectSubmit{
+.submitButton{
   width: 30%;
   align-self: end;
   border: none;
@@ -61,13 +61,13 @@ form label {
   padding: 10px;
 }
 
-.projectFormExit{
+.formExit{
   padding: 2px 10px;
   font-size: 1.2rem;
   
 }
 
-.newProjectSubmit:hover, .projectFormExit:hover{
+.submitButton:hover, .formExit:hover{
   background-color: rgba(0, 0, 0, 0.116);
   cursor: pointer;
   border-radius: 15px;

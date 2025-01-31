@@ -1,5 +1,5 @@
 import "../styles/sidebar.styles.css";
-import { addProjectForm } from "./Form";
+import { addForm } from "./Form";
 import { projectManager } from "./projectManager";
 import { updateContent } from "./content";
 
@@ -8,7 +8,7 @@ export function printProjectNames() {
   projectsDiv.innerHTML = "";
   projectManager.getProjectsList().forEach((project, i) => {
     const projectNav = document.createElement("div");
-    projectNav.classList.add(`projectNav`);
+    projectNav.classList.add("projectNav", "navDiv");
 
     const projectDot = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -38,9 +38,7 @@ export function printProjectNames() {
 
     const taskNumber = document.createElement("span");
     taskNumber.classList.add("taskNumber");
-    taskNumber.textContent = projectManager
-      .getProjectByName(project.name)
-      .getToDos().length;
+    taskNumber.textContent = "3";
 
     projectNav.appendChild(projectDot);
     projectNav.appendChild(ListProjectsInDOM);
@@ -94,10 +92,15 @@ export default function sidebar() {
 
   const addTaskDiv = document.createElement("div");
   addTaskDiv.classList.add("addTaskDiv");
+  addTaskDiv.addEventListener("click", (e) => {
+    //console.log(e.target.classList.value);
+    addForm(e.target.classList.value);
+  });
 
   const addTaskButton = document.createElement("p");
   addTaskButton.textContent = "Add Task";
   addTaskButton.classList.add("addTaskButton");
+
 
   //<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>note-plus</title><path d="M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z" /></svg>
   const addTaskSVG = document.createElementNS(
@@ -106,10 +109,16 @@ export default function sidebar() {
   );
   addTaskSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   addTaskSVG.setAttribute("viewBox", "0 0 24 24");
-  addTaskSVG.classList.add('addTaskSVG');
+  addTaskSVG.classList.add("addTaskSVG");
 
-  const addTaskPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  addTaskPath.setAttribute('d','M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z');
+  const addTaskPath = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "path"
+  );
+  addTaskPath.setAttribute(
+    "d",
+    "M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z"
+  );
 
   addTaskSVG.appendChild(addTaskPath);
   addTaskDiv.appendChild(addTaskSVG);
@@ -117,7 +126,7 @@ export default function sidebar() {
   sidebarContainer.appendChild(addTaskDiv);
 
   const todayDiv = document.createElement("div");
-  todayDiv.classList.add("todayDiv");
+  todayDiv.classList.add("todayDiv", "navDiv");
 
   //<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-today</title><path d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
   const todaySVG = document.createElementNS(
@@ -153,7 +162,7 @@ export default function sidebar() {
   todayDiv.appendChild(todayTasksNumber);
 
   const upcomingDiv = document.createElement("div");
-  upcomingDiv.classList.add("upcomingDiv");
+  upcomingDiv.classList.add("upcomingDiv", "navDiv");
 
   //<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-upcoming</title><path d="M6 1H8V3H16V1H18V3H19C20.11 3 21 3.9 21 5V19C21 20.11 20.11 21 19 21H5C3.89 21 3 20.1 3 19V5C3 3.89 3.89 3 5 3H6V1M5 8V19H19V8H5M7 10H17V12H7V10Z" /></svg>
   const upcomingSVG = document.createElementNS(
@@ -211,7 +220,10 @@ export default function sidebar() {
   const addProjectButton = document.createElement("p");
   addProjectButton.textContent = "+";
   addProjectButton.classList.add("addProjectButton");
-  addProjectButton.addEventListener("click", addProjectForm);
+  addProjectButton.addEventListener("click", (e) => {
+    //console.log(e.target.classList.value);
+    addForm(e.target.classList.value);
+  });
 
   projectsTitleDiv.appendChild(yourProjects);
   projectsTitleDiv.appendChild(addProjectButton);

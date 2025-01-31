@@ -2,10 +2,10 @@ import "../styles/todos.styles.css";
 
 export class toDos {
   constructor(
-    title = "testTitle",
-    description = "testDesc",
-    dueDate = "testDate",
-    priority = "High"
+    title,
+    description,
+    dueDate,
+    priority
   ) {
     this.title = title;
     this.description = description;

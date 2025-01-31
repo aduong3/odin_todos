@@ -8,4 +8,5 @@ sidebar();
 content();
 
 
+
 window.projectManager = projectManager;
