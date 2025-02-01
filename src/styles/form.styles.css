@@ -23,7 +23,7 @@
 form{
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 form label {
@@ -31,9 +31,13 @@ form label {
 }
 
 .inputNameDiv,
-.inputColorDiv {
+.inputColorDiv,
+.inputDescDiv,
+.inputDateDiv,
+.selectDiv {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
 .color{

@@ -2,6 +2,19 @@ import "../styles/form.styles.css";
 
 import { projectManager } from "./projectManager";
 import { printProjectNames } from "./sidebar";
+import { updateContent } from "./content";
+
+function handleNewTaskSubmit() {
+  const getNameValue = document.querySelector(".taskName").value;
+  const getDescValue = document.querySelector(".description").value;
+  const getDateValue = document.querySelector(".date").value;
+  const getPriorityValue = document.querySelector(".prioritySelect").value;
+  const getSelectValue = document.querySelector(".selectProject").value;
+  console.log(getSelectValue);
+  projectManager
+    .getProjectByName(getSelectValue)
+    .addToDo(getNameValue, getDescValue, getDateValue, getPriorityValue);
+}
 
 function handleNewProjectSubmit() {
   const getNameValue = document.querySelector(".projectName");
@@ -82,13 +95,13 @@ function addNewTasks() {
   inputNameDiv.classList.add("inputNameDiv");
 
   const nameLabel = document.createElement("label");
-  nameLabel.setAttribute("for", "projectName");
+  nameLabel.setAttribute("for", "taskName");
   nameLabel.textContent = "Name";
 
   const nameInput = document.createElement("input");
   nameInput.setAttribute("type", "text");
-  nameInput.setAttribute("id", "projectName");
-  nameInput.classList.add("projectName");
+  nameInput.setAttribute("id", "taskName");
+  nameInput.classList.add("taskName");
 
   const nameError = document.createElement("span");
   nameError.classList.add("nameError");
@@ -131,14 +144,69 @@ function addNewTasks() {
   inputDateDiv.appendChild(dateInput);
   form.appendChild(inputDateDiv);
 
+  const priorityDiv = document.createElement("div");
+  priorityDiv.classList.add("priorityDiv");
+
+  const priorityLabel = document.createElement("label");
+  priorityLabel.classList.add("priorityLabel");
+  priorityLabel.textContent = "Priority";
+
+  priorityDiv.appendChild(priorityLabel);
+
+  const prioritySelect = document.createElement("select");
+  prioritySelect.classList.add("prioritySelect");
+
+  const lowOption = document.createElement("option");
+  lowOption.value = "Low";
+  lowOption.textContent = "Low";
+  prioritySelect.appendChild(lowOption);
+
+  const mediumOption = document.createElement("option");
+  mediumOption.value = "Medium";
+  mediumOption.textContent = "Medium";
+  prioritySelect.appendChild(mediumOption);
+
+  const highOption = document.createElement("option");
+  highOption.value = "High";
+  highOption.textContent = "High";
+  prioritySelect.appendChild(highOption);
+  priorityDiv.appendChild(prioritySelect);
+
+  form.appendChild(priorityDiv);
+
+  const selectDiv = document.createElement("div");
+  selectDiv.classList.add("selectDiv");
+
+  const selectLabel = document.createElement("label");
+  selectLabel.classList.add("selectLabel");
+  selectLabel.textContent = "Project";
+
+  const selectProject = document.createElement("select");
+  selectProject.classList.add("selectProject");
+
+  projectManager.getProjectsList().forEach((project) => {
+    const option = document.createElement("option");
+    option.value = project.name;
+    option.textContent = project.name;
+
+    selectProject.appendChild(option);
+  });
+  selectDiv.appendChild(selectLabel);
+  selectDiv.appendChild(selectProject);
+
+  form.appendChild(selectDiv);
+
   const submitButton = document.createElement("button");
   submitButton.classList.add("submitButton");
   submitButton.textContent = "Submit";
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     if (nameInput.value.length != 0) {
-      handleNewProjectSubmit();
-      printProjectNames();
+      handleNewTaskSubmit();
+      updateContent(
+        selectProject.value,
+        projectManager.getProjectByName(selectProject.value).getToDos()
+      );
       nameError.style.opacity = "0";
       nameInput.value = "";
     } else {

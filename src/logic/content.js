@@ -8,10 +8,6 @@ export default function content() {
 }
 
 export function updateContent(projName, toDos) {
-  //console.log(projName, toDos);
-  // toDos.forEach((toDo) => {
-  //   console.log(toDo);
-  // });
   const contentContainer = document.querySelector(".contentContainer");
   if (contentContainer.innerHTML != null) {
     contentContainer.innerHTML = "";
@@ -33,14 +29,25 @@ export function updateContent(projName, toDos) {
 
   toDos.forEach((task) => {
     const toDoDiv = document.createElement("div");
-    toDoDiv.classList.add("toDoDiv");
+    toDoDiv.classList.add("toDoDiv", task.priority);
 
     const toDoName = document.createElement("p");
-    console.log(task);
+    //console.log(task);
     toDoName.textContent = `${task.title}`;
-    toDoName.classList.add("toDo", task.title, task.priority);
-
+    toDoName.classList.add("toDoTitle");
     toDoDiv.appendChild(toDoName);
+
+    const toDoDate = document.createElement("p");
+    toDoDate.textContent = `${task.dueDate}`;
+    toDoDate.classList.add("toDoDate");
+    //console.log(typeof task.dueDate);
+    toDoDiv.appendChild(toDoDate);
+
+    const toDoPriority = document.createElement("p");
+    toDoPriority.textContent = `${task.priority}`;
+    toDoPriority.classList.add("toDoPriority");
+    toDoDiv.appendChild(toDoPriority);
+
     contentToDoListDiv.appendChild(toDoDiv);
   });
 
