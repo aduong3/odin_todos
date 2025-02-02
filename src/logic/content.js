@@ -2,15 +2,32 @@ import "../styles/content.styles.css";
 
 import { blackOutDiv } from "./Form";
 
-function pullUpInfo(){
+function pullUpInfo(task) {
+  //console.log(task);
   const blackOut = blackOutDiv();
-  const infoDiv = document.createElement('div');
-  infoDiv.classList.add('infoDiv');
+  const infoDiv = document.createElement("div");
+  infoDiv.classList.add("infoDiv");
 
+  const taskName = document.createElement("h2");
+  taskName.classList.add("taskName");
+  taskName.textContent = task.title;
 
+  infoDiv.appendChild(taskName);
 
+  const descriptionDiv = document.createElement("div");
+  descriptionDiv.classList.add("descriptionDiv");
 
+  const taskDescriptionLabel = document.createElement("h3");
+  taskDescriptionLabel.textContent = "Description";
+  taskDescriptionLabel.classList.add("descriptionLabel");
 
+  const taskDescriptionValue = document.createElement("p");
+  taskDescriptionValue.textContent = task.description;
+  taskDescriptionValue.classList.add("descriptionValue");
+
+  descriptionDiv.appendChild(taskDescriptionLabel);
+  descriptionDiv.appendChild(taskDescriptionValue);
+  infoDiv.appendChild(descriptionDiv);
 
   blackOut.appendChild(infoDiv);
   document.body.appendChild(blackOut);
@@ -43,7 +60,7 @@ export function updateContent(projName, toDos) {
   const contentToDoListDiv = document.createElement("div");
   contentToDoListDiv.classList.add("contentToDoListDiv");
 
-  toDos.forEach((task) => {
+  toDos.forEach((task, i) => {
     const toDoDiv = document.createElement("div");
     toDoDiv.classList.add("toDoDiv", task.priority);
 
@@ -64,7 +81,7 @@ export function updateContent(projName, toDos) {
     toDoPriority.classList.add("toDoPriority");
     toDoDiv.appendChild(toDoPriority);
 
-    toDoDiv.addEventListener('click', pullUpInfo);
+    toDoDiv.addEventListener("click", () => pullUpInfo(task));
 
     contentToDoListDiv.appendChild(toDoDiv);
   });
