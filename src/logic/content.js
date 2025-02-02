@@ -1,5 +1,21 @@
 import "../styles/content.styles.css";
 
+import { blackOutDiv } from "./Form";
+
+function pullUpInfo(){
+  const blackOut = blackOutDiv();
+  const infoDiv = document.createElement('div');
+  infoDiv.classList.add('infoDiv');
+
+
+
+
+
+
+  blackOut.appendChild(infoDiv);
+  document.body.appendChild(blackOut);
+}
+
 export default function content() {
   const contentContainer = document.createElement("div");
   contentContainer.classList.add("contentContainer");
@@ -47,6 +63,8 @@ export function updateContent(projName, toDos) {
     toDoPriority.textContent = `${task.priority}`;
     toDoPriority.classList.add("toDoPriority");
     toDoDiv.appendChild(toDoPriority);
+
+    toDoDiv.addEventListener('click', pullUpInfo);
 
     contentToDoListDiv.appendChild(toDoDiv);
   });

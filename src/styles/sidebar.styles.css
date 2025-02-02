@@ -106,14 +106,14 @@
   width: 30px;
 }
 
-.todayDiv:hover .todayTasksNumber, .upcomingDiv:hover .upcomingTasksNumber{
+.todayDiv:hover .todayTasksNumber, .upcomingDiv:hover .upcomingTasksNumber, .projectNav:hover .taskNumber{
   display: none;
 }
 
-.todayDiv:hover .menuIcon, .upcomingDiv:hover .menuIcon{
+.todayDiv:hover .menuIcon, .upcomingDiv:hover .menuIcon, .projectNav:hover .menuIcon{
   display: inline;
 }
 
 .menuIcon:hover{
-  fill: rgb(109, 5, 5);
+  fill: rgb(235, 106, 46);
 }

@@ -4,6 +4,18 @@ import { projectManager } from "./projectManager";
 import { printProjectNames } from "./sidebar";
 import { updateContent } from "./content";
 
+export function blackOutDiv(){
+  const blackoutBackgroundDiv = document.createElement("div");
+  blackoutBackgroundDiv.classList.add("blackoutBG");
+  blackoutBackgroundDiv.addEventListener("click", (e) => {
+    //console.log("clicked background");
+    if (e.target === blackoutBackgroundDiv) {
+      blackoutBackgroundDiv.remove();
+    }
+  });
+  return blackoutBackgroundDiv;
+}
+
 function handleNewTaskSubmit() {
   const getNameValue = document.querySelector(".taskName").value;
   const getDescValue = document.querySelector(".description").value;
@@ -222,14 +234,7 @@ function addNewTasks() {
 
 export function addForm(target) {
   removePreviousForms();
-  const blackoutBackgroundDiv = document.createElement("div");
-  blackoutBackgroundDiv.classList.add("blackoutBG");
-  blackoutBackgroundDiv.addEventListener("click", (e) => {
-    //console.log("clicked background");
-    if (e.target === blackoutBackgroundDiv) {
-      blackoutBackgroundDiv.remove();
-    }
-  });
+  const blackoutBackgroundDiv = blackOutDiv();
 
   const formDiv = document.createElement("div");
   formDiv.classList.add("formDiv");

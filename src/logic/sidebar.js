@@ -3,6 +3,28 @@ import { addForm } from "./Form";
 import { projectManager } from "./projectManager";
 import { updateContent } from "./content";
 
+function createMenuIcon() {
+  const menuIcon = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  menuIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  menuIcon.setAttribute("viewBox", "0 0 24 24");
+  menuIcon.classList.add("menuIcon");
+
+  const menuIconPath = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "path"
+  );
+  menuIconPath.setAttribute(
+    "d",
+    "M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
+  );
+
+  menuIcon.appendChild(menuIconPath);
+  return menuIcon;
+}
+
 export function printProjectNames() {
   const projectsDiv = document.querySelector(".projectsDiv");
   projectsDiv.innerHTML = "";
@@ -40,9 +62,12 @@ export function printProjectNames() {
     taskNumber.classList.add("taskNumber");
     taskNumber.textContent = "3";
 
+    
+
     projectNav.appendChild(projectDot);
     projectNav.appendChild(ListProjectsInDOM);
     projectNav.appendChild(taskNumber);
+    projectNav.appendChild(createMenuIcon());
 
     projectNav.addEventListener("click", () =>
       updateContent(
@@ -55,27 +80,7 @@ export function printProjectNames() {
   });
 }
 
-function createMenuIcon() {
-  const menuIcon = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg"
-  );
-  menuIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  menuIcon.setAttribute("viewBox", "0 0 24 24");
-  menuIcon.classList.add("menuIcon");
 
-  const menuIconPath = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "path"
-  );
-  menuIconPath.setAttribute(
-    "d",
-    "M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-  );
-
-  menuIcon.appendChild(menuIconPath);
-  return menuIcon;
-}
 
 export default function sidebar() {
   const sidebarContainer = document.createElement("div");

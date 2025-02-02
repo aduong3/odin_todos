@@ -25,6 +25,10 @@
   border-radius: 6px;
 }
 
+.toDoDate{
+  justify-self: center;
+}
+
 .Low:hover{
 background-color: rgb(111, 255, 111);
 }
