@@ -1,22 +1,28 @@
-.contentContainer{
+:root {
+  --high-prio: rgb(255, 103, 103);
+  --medium-prio: rgb(253, 253, 101);
+  --low-prio: rgb(111, 255, 111);
+}
+
+.contentContainer {
   display: grid;
   grid-template-rows: 1fr 3fr;
   grid-template-columns: 1fr;
   width: 100%;
 }
-.contentHeaderDiv{
+.contentHeaderDiv {
   padding-bottom: 20px;
   align-self: center;
   justify-self: center;
 }
 
-.contentToDoListDiv{
+.contentToDoListDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.toDoDiv{
+.toDoDiv {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 16px;
@@ -25,18 +31,39 @@
   border-radius: 6px;
 }
 
-.toDoDate{
+.toDoDate {
   justify-self: center;
 }
 
-.Low:hover{
-background-color: rgb(111, 255, 111);
+.Low:hover,
+.bg-Low {
+  background-color: var(--low-prio);
 }
 
-.Medium:hover{
-  background-color: rgb(253, 253, 101);
+.Medium:hover,
+.bg-Medium {
+  background-color: var(--medium-prio);
 }
 
-.High:hover{
-  background-color: rgb(255, 103, 103);
+.High:hover,
+.bg-High {
+  background-color: var(--high-prio);
+}
+
+.priorityColorDiv {
+  height: 1vh;
+  border-radius: 8px 8px 0 0;
+}
+
+.cardDiv {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.39);
+}
+
+.infoDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 12px 24px;
 }

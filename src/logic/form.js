@@ -4,7 +4,7 @@ import { projectManager } from "./projectManager";
 import { printProjectNames } from "./sidebar";
 import { updateContent } from "./content";
 
-export function blackOutDiv(){
+export function blackOutDiv() {
   const blackoutBackgroundDiv = document.createElement("div");
   blackoutBackgroundDiv.classList.add("blackoutBG");
   blackoutBackgroundDiv.addEventListener("click", (e) => {
@@ -17,25 +17,28 @@ export function blackOutDiv(){
 }
 
 function handleNewTaskSubmit() {
-  const getNameValue = document.querySelector(".taskName").value;
-  const getDescValue = document.querySelector(".description").value;
-  const getDateValue = document.querySelector(".date").value;
-  const getPriorityValue = document.querySelector(".prioritySelect").value;
-  const getSelectValue = document.querySelector(".selectProject").value;
-  console.log(getSelectValue);
+  const getName = document.querySelector(".taskName");
+  const getDesc = document.querySelector(".description");
+  const getDate = document.querySelector(".date");
+  const getPriority = document.querySelector(".prioritySelect");
+  const getSelect = document.querySelector(".selectProject");
+  //console.log(getDesc.value);
+  if (getDesc.value === "") getDesc.value = "No Description";
+  console.log(getDate.value);
+  //if (getDate.value === '') getDate.value = new Date();
   projectManager
-    .getProjectByName(getSelectValue)
-    .addToDo(getNameValue, getDescValue, getDateValue, getPriorityValue);
+    .getProjectByName(getSelect.value)
+    .addToDo(getName.value, getDesc.value, getDate.value, getPriority.value);
 }
 
 function handleNewProjectSubmit() {
-  const getNameValue = document.querySelector(".projectName");
-  const getColorValue = document.querySelector(".color");
+  const getName = document.querySelector(".projectName");
+  const getColor = document.querySelector(".color");
 
-  projectManager.addProject(getNameValue.value, getColorValue.value);
+  projectManager.addProject(getName.value, getColor.value);
 }
 
-function removePreviousForms() {
+export function removePreviousForms() {
   const existingForm = document.querySelector(".blackoutBG");
   if (existingForm) existingForm.remove();
 }
@@ -147,9 +150,16 @@ function addNewTasks() {
   dateLabel.setAttribute("for", "date");
   dateLabel.textContent = "Date";
 
+  let today = new Date().toLocaleDateString().split("T")[0];
+  let [month, day, year] = today.split("/");
+  month = month < 10 ? `0${month}` : month;
+  day = day < 10 ? `0${day}` : day;
+  let formattedToday = `${year}-${month}-${day}`;
+  console.log(formattedToday);
   const dateInput = document.createElement("input");
   dateInput.setAttribute("type", "date");
   dateInput.setAttribute("id", "date");
+  dateInput.setAttribute("value", formattedToday);
   dateInput.classList.add("date");
 
   inputDateDiv.appendChild(dateLabel);

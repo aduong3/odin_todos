@@ -1,12 +1,21 @@
 import "../styles/content.styles.css";
 
-import { blackOutDiv } from "./Form";
+import { blackOutDiv, removePreviousForms } from "./Form";
 
 function pullUpInfo(task) {
   //console.log(task);
+  removePreviousForms();
   const blackOut = blackOutDiv();
+
+  const cardDiv = document.createElement('div');
+  cardDiv.classList.add('cardDiv');
+
   const infoDiv = document.createElement("div");
   infoDiv.classList.add("infoDiv");
+
+  const priorityColorDiv = document.createElement("div");
+  priorityColorDiv.classList.add(`bg-${task.priority}`, 'priorityColorDiv');
+  cardDiv.appendChild(priorityColorDiv);
 
   const taskName = document.createElement("h2");
   taskName.classList.add("taskName");
@@ -29,7 +38,23 @@ function pullUpInfo(task) {
   descriptionDiv.appendChild(taskDescriptionValue);
   infoDiv.appendChild(descriptionDiv);
 
-  blackOut.appendChild(infoDiv);
+  const dateDiv = document.createElement("div");
+  dateDiv.classList.add("dateDiv");
+
+  const dateLabel = document.createElement("h3");
+  dateLabel.classList.add("dateLabel");
+  dateLabel.textContent = "Date";
+
+  const dateValue = document.createElement("p");
+  dateValue.classList.add("dateValue");
+  dateValue.textContent = task.dueDate;
+
+  dateDiv.appendChild(dateLabel);
+  dateDiv.appendChild(dateValue);
+  infoDiv.appendChild(dateDiv);
+
+  cardDiv.appendChild(infoDiv);
+  blackOut.appendChild(cardDiv);
   document.body.appendChild(blackOut);
 }
 
@@ -60,7 +85,7 @@ export function updateContent(projName, toDos) {
   const contentToDoListDiv = document.createElement("div");
   contentToDoListDiv.classList.add("contentToDoListDiv");
 
-  toDos.forEach((task, i) => {
+  toDos.forEach((task) => {
     const toDoDiv = document.createElement("div");
     toDoDiv.classList.add("toDoDiv", task.priority);
 
