@@ -59,6 +59,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.39);
+  width: 20%;
 }
 
 .infoDiv {
@@ -66,4 +67,20 @@
   flex-direction: column;
   gap: 24px;
   padding: 12px 24px;
+}
+
+.buttonsDiv{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttonsDiv > *{
+  padding: 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.buttonsDiv > *:hover{
+  background-color: rgba(128, 128, 128, 0.267);
 }

@@ -34,6 +34,7 @@ form label {
 .inputColorDiv,
 .inputDescDiv,
 .inputDateDiv,
+.priorityDiv,
 .selectDiv {
   display: flex;
   flex-direction: column;

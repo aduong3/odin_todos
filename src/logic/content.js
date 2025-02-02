@@ -53,6 +53,22 @@ function pullUpInfo(task) {
   dateDiv.appendChild(dateValue);
   infoDiv.appendChild(dateDiv);
 
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.classList.add('buttonsDiv');
+
+  const editButton = document.createElement('p');
+  editButton.classList.add('editTaskButton');
+  editButton.textContent = 'Edit';
+
+  buttonsDiv.appendChild(editButton);
+
+  const deleteButton = document.createElement('p');
+  deleteButton.classList.add('deleteTaskButton');
+  deleteButton.textContent = 'Delete';
+
+  buttonsDiv.appendChild(deleteButton);
+  infoDiv.appendChild(buttonsDiv);
+
   cardDiv.appendChild(infoDiv);
   blackOut.appendChild(cardDiv);
   document.body.appendChild(blackOut);
