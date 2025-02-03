@@ -1,7 +1,28 @@
 import "../styles/sidebar.styles.css";
-import { addForm } from "./Form";
+import { addForm, getTodaysDate } from "./Form";
 import { projectManager } from "./projectManager";
 import { updateContent } from "./content";
+
+function countTodayTask() {
+  let amount = 0;
+  projectManager.getProjectsList().forEach((project) => {
+    projectManager
+      .getProjectByName(project.name)
+      .getToDos()
+      .forEach((toDo) => {
+        if (toDo.dueDate === getTodaysDate()) {
+          amount++;
+        }
+      });
+  });
+  //console.log(amount);
+  return amount;
+}
+
+export function updateCountToday() {
+  let todayTasksNumber = document.querySelector(".todayTasksNumber");
+  todayTasksNumber.textContent = countTodayTask();
+}
 
 function createMenuIcon() {
   const menuIcon = document.createElementNS(
@@ -60,9 +81,9 @@ export function printProjectNames() {
 
     const taskNumber = document.createElement("span");
     taskNumber.classList.add("taskNumber");
-    taskNumber.textContent = "3";
-
-    
+    taskNumber.textContent = projectManager
+      .getProjectByName(project.name)
+      .getToDos().length;
 
     projectNav.appendChild(projectDot);
     projectNav.appendChild(ListProjectsInDOM);
@@ -79,8 +100,6 @@ export function printProjectNames() {
     projectsDiv.appendChild(projectNav);
   });
 }
-
-
 
 export default function sidebar() {
   const sidebarContainer = document.createElement("div");
@@ -105,7 +124,6 @@ export default function sidebar() {
   const addTaskButton = document.createElement("p");
   addTaskButton.textContent = "Add Task";
   addTaskButton.classList.add("addTaskButton");
-
 
   //<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>note-plus</title><path d="M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z" /></svg>
   const addTaskSVG = document.createElementNS(
@@ -162,7 +180,7 @@ export default function sidebar() {
 
   const todayTasksNumber = document.createElement("span");
   todayTasksNumber.classList.add("todayTasksNumber");
-  todayTasksNumber.textContent = "3";
+  todayTasksNumber.textContent = "0" || countTodayTask();
 
   todayDiv.appendChild(todayTasksNumber);
 
@@ -203,7 +221,6 @@ export default function sidebar() {
   upcomingDiv.appendChild(upcomingTasksNumber);
 
   //<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>dots-horizontal</title><path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" /></svg>
-
 
   sortByDiv.appendChild(todayDiv);
   sortByDiv.appendChild(upcomingDiv);

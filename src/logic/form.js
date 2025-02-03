@@ -1,8 +1,17 @@
 import "../styles/form.styles.css";
 
 import { projectManager } from "./projectManager";
-import { printProjectNames } from "./sidebar";
+import { printProjectNames, updateCountToday } from "./sidebar";
 import { updateContent } from "./content";
+
+export function getTodaysDate() {
+  let today = new Date().toLocaleDateString().split("T")[0];
+  let [month, day, year] = today.split("/");
+  month = month < 10 ? `0${month}` : month;
+  day = day < 10 ? `0${day}` : day;
+  let formattedToday = `${year}-${month}-${day}`;
+  return formattedToday;
+}
 
 export function blackOutDiv() {
   const blackoutBackgroundDiv = document.createElement("div");
@@ -24,7 +33,7 @@ function handleNewTaskSubmit() {
   const getSelect = document.querySelector(".selectProject");
   //console.log(getDesc.value);
   if (getDesc.value === "") getDesc.value = "No Description";
-  console.log(getDate.value);
+  //console.log(getDate.value);
   //if (getDate.value === '') getDate.value = new Date();
   projectManager
     .getProjectByName(getSelect.value)
@@ -153,16 +162,17 @@ function addNewTasks(task = null) {
   dateLabel.setAttribute("for", "date");
   dateLabel.textContent = "Date";
 
-  let today = new Date().toLocaleDateString().split("T")[0];
-  let [month, day, year] = today.split("/");
-  month = month < 10 ? `0${month}` : month;
-  day = day < 10 ? `0${day}` : day;
-  let formattedToday = `${year}-${month}-${day}`;
+  // let today = new Date().toLocaleDateString().split("T")[0];
+  // let [month, day, year] = today.split("/");
+  // month = month < 10 ? `0${month}` : month;
+  // day = day < 10 ? `0${day}` : day;
+  // let formattedToday = `${year}-${month}-${day}`;
   //console.log(formattedToday);
+
   const dateInput = document.createElement("input");
   dateInput.setAttribute("type", "date");
   dateInput.setAttribute("id", "date");
-  dateInput.value = task ? task.dueDate : formattedToday;
+  dateInput.value = task ? task.dueDate : getTodaysDate();
   dateInput.classList.add("date");
 
   inputDateDiv.appendChild(dateLabel);
@@ -196,6 +206,10 @@ function addNewTasks(task = null) {
   highOption.textContent = "High";
   prioritySelect.appendChild(highOption);
   priorityDiv.appendChild(prioritySelect);
+
+  if (task) {
+    prioritySelect.value = task.priority;
+  }
 
   form.appendChild(priorityDiv);
 
@@ -240,6 +254,8 @@ function addNewTasks(task = null) {
       );
       nameError.style.opacity = "0";
       removePreviousForms();
+      printProjectNames();
+      if (dateInput.value === getTodaysDate()) updateCountToday();
     } else {
       nameError.style.opacity = "1";
       nameError.textContent = "Name is required.";
