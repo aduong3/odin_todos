@@ -102,7 +102,7 @@ function addNewProject() {
   return form;
 }
 
-function addNewTasks() {
+function addNewTasks(task = null) {
   const form = document.createElement("form");
   form.classList.add("form");
 
@@ -116,6 +116,8 @@ function addNewTasks() {
   const nameInput = document.createElement("input");
   nameInput.setAttribute("type", "text");
   nameInput.setAttribute("id", "taskName");
+  nameInput.value = task ? task.title : "";
+
   nameInput.classList.add("taskName");
 
   const nameError = document.createElement("span");
@@ -138,6 +140,7 @@ function addNewTasks() {
   descInput.setAttribute("type", "text");
   descInput.setAttribute("id", "description");
   descInput.classList.add("description");
+  descInput.value = task ? task.description : "";
 
   inputDescDiv.appendChild(descLabel);
   inputDescDiv.appendChild(descInput);
@@ -155,11 +158,11 @@ function addNewTasks() {
   month = month < 10 ? `0${month}` : month;
   day = day < 10 ? `0${day}` : day;
   let formattedToday = `${year}-${month}-${day}`;
-  console.log(formattedToday);
+  //console.log(formattedToday);
   const dateInput = document.createElement("input");
   dateInput.setAttribute("type", "date");
   dateInput.setAttribute("id", "date");
-  dateInput.setAttribute("value", formattedToday);
+  dateInput.value = task ? task.dueDate : formattedToday;
   dateInput.classList.add("date");
 
   inputDateDiv.appendChild(dateLabel);
@@ -220,17 +223,23 @@ function addNewTasks() {
 
   const submitButton = document.createElement("button");
   submitButton.classList.add("submitButton");
-  submitButton.textContent = "Submit";
+  submitButton.textContent = task ? "Update" : "Submit";
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     if (nameInput.value.length != 0) {
-      handleNewTaskSubmit();
+      if (!task) handleNewTaskSubmit();
+      else {
+        task.title = nameInput.value;
+        task.description = descInput.value;
+        task.dueDate = dateInput.value;
+        task.priority = prioritySelect.value;
+      }
       updateContent(
         selectProject.value,
         projectManager.getProjectByName(selectProject.value).getToDos()
       );
       nameError.style.opacity = "0";
-      nameInput.value = "";
+      removePreviousForms();
     } else {
       nameError.style.opacity = "1";
       nameError.textContent = "Name is required.";
@@ -242,7 +251,8 @@ function addNewTasks() {
   return form;
 }
 
-export function addForm(target) {
+export function addForm(target, task = null) {
+  console.log(task);
   removePreviousForms();
   const blackoutBackgroundDiv = blackOutDiv();
 
@@ -275,7 +285,7 @@ export function addForm(target) {
   if (target === "addProjectButton") {
     formElements = addNewProject();
   } else {
-    formElements = addNewTasks();
+    formElements = addNewTasks(task);
   }
 
   formDiv.appendChild(formElements);

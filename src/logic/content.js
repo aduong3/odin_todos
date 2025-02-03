@@ -1,6 +1,6 @@
 import "../styles/content.styles.css";
 
-import { blackOutDiv, removePreviousForms } from "./Form";
+import { addForm, blackOutDiv, removePreviousForms } from "./Form";
 
 function pullUpInfo(task) {
   //console.log(task);
@@ -59,6 +59,7 @@ function pullUpInfo(task) {
   const editButton = document.createElement('p');
   editButton.classList.add('editTaskButton');
   editButton.textContent = 'Edit';
+  editButton.addEventListener('click', ()=> addForm('AddTaskButton', task))
 
   buttonsDiv.appendChild(editButton);
 
