@@ -106,11 +106,11 @@
   width: 30px;
 }
 
-.todayDiv:hover .todayTasksNumber, .upcomingDiv:hover .upcomingTasksNumber, .projectNav:hover .taskNumber{
+.projectNav:hover .taskNumber{
   display: none;
 }
 
-.todayDiv:hover .menuIcon, .upcomingDiv:hover .menuIcon, .projectNav:hover .menuIcon{
+.projectNav:hover .menuIcon{
   display: inline;
 }
 
