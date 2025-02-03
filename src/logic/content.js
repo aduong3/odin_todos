@@ -1,5 +1,6 @@
 import "../styles/content.styles.css";
 
+import { updateCountToday } from "./sidebar";
 import { addForm, blackOutDiv, removePreviousForms } from "./Form";
 import { projectManager } from "./projectManager";
 
@@ -69,7 +70,15 @@ function pullUpInfo(projName, task) {
   deleteButton.textContent = "Delete";
   deleteButton.addEventListener("click", () => {
     projectManager.getProjectByName(projName).deleteToDo(task);
-    updateContent(projName, projectManager.getProjectByName(projName).getToDos());
+    updateCountToday();
+    updateContent(
+      projName,
+      projectManager.getProjectByName(projName).getToDos()
+    );
+    const taskNumber = document.querySelector(".taskNumber");
+    taskNumber.textContent = projectManager
+      .getProjectByName(projName)
+      .getToDos().length;
   });
 
   buttonsDiv.appendChild(deleteButton);
