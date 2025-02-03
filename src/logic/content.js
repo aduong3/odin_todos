@@ -1,20 +1,21 @@
 import "../styles/content.styles.css";
 
 import { addForm, blackOutDiv, removePreviousForms } from "./Form";
+import { projectManager } from "./projectManager";
 
-function pullUpInfo(task) {
+function pullUpInfo(projName, task) {
   //console.log(task);
   removePreviousForms();
   const blackOut = blackOutDiv();
 
-  const cardDiv = document.createElement('div');
-  cardDiv.classList.add('cardDiv');
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("cardDiv");
 
   const infoDiv = document.createElement("div");
   infoDiv.classList.add("infoDiv");
 
   const priorityColorDiv = document.createElement("div");
-  priorityColorDiv.classList.add(`bg-${task.priority}`, 'priorityColorDiv');
+  priorityColorDiv.classList.add(`bg-${task.priority}`, "priorityColorDiv");
   cardDiv.appendChild(priorityColorDiv);
 
   const taskName = document.createElement("h2");
@@ -53,19 +54,23 @@ function pullUpInfo(task) {
   dateDiv.appendChild(dateValue);
   infoDiv.appendChild(dateDiv);
 
-  const buttonsDiv = document.createElement('div');
-  buttonsDiv.classList.add('buttonsDiv');
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.classList.add("buttonsDiv");
 
-  const editButton = document.createElement('p');
-  editButton.classList.add('editTaskButton');
-  editButton.textContent = 'Edit';
-  editButton.addEventListener('click', ()=> addForm('AddTaskButton', task))
+  const editButton = document.createElement("p");
+  editButton.classList.add("editTaskButton");
+  editButton.textContent = "Edit";
+  editButton.addEventListener("click", () => addForm("AddTaskButton", task));
 
   buttonsDiv.appendChild(editButton);
 
-  const deleteButton = document.createElement('p');
-  deleteButton.classList.add('deleteTaskButton');
-  deleteButton.textContent = 'Delete';
+  const deleteButton = document.createElement("p");
+  deleteButton.classList.add("deleteTaskButton");
+  deleteButton.textContent = "Delete";
+  deleteButton.addEventListener("click", () => {
+    projectManager.getProjectByName(projName).deleteToDo(task);
+    updateContent(projName, projectManager.getProjectByName(projName).getToDos());
+  });
 
   buttonsDiv.appendChild(deleteButton);
   infoDiv.appendChild(buttonsDiv);
@@ -123,7 +128,7 @@ export function updateContent(projName, toDos) {
     toDoPriority.classList.add("toDoPriority");
     toDoDiv.appendChild(toDoPriority);
 
-    toDoDiv.addEventListener("click", () => pullUpInfo(task));
+    toDoDiv.addEventListener("click", () => pullUpInfo(projName, task));
 
     contentToDoListDiv.appendChild(toDoDiv);
   });

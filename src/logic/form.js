@@ -252,7 +252,7 @@ function addNewTasks(task = null) {
 }
 
 export function addForm(target, task = null) {
-  console.log(task);
+  //console.log(task);
   removePreviousForms();
   const blackoutBackgroundDiv = blackOutDiv();
 
