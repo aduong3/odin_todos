@@ -4,6 +4,7 @@ export class Projects {
   constructor(name, color) {
     this.name = name;
     this.color = color;
+    this.taskID = 0;
     this.taskCounter = 0;
     this.toDoList = [];
   }
@@ -14,9 +15,10 @@ export class Projects {
       description,
       dueDate,
       priority,
-      this.taskCounter++
+      this.taskID++
     );
     this.toDoList.push(newToDo);
+    this.taskCounter++;
   }
 
   getToDos() {
@@ -27,5 +29,6 @@ export class Projects {
     this.toDoList = this.toDoList.filter(
       (currentTask) => currentTask.id !== task.id
     );
+    this.taskCounter--;
   }
 }

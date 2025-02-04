@@ -69,16 +69,17 @@ function pullUpInfo(projName, task) {
   deleteButton.classList.add("deleteTaskButton");
   deleteButton.textContent = "Delete";
   deleteButton.addEventListener("click", () => {
+    console.log(projName);
     projectManager.getProjectByName(projName).deleteToDo(task);
     updateCountToday();
     updateContent(
       projName,
       projectManager.getProjectByName(projName).getToDos()
     );
-    const taskNumber = document.querySelector(".taskNumber");
-    taskNumber.textContent = projectManager
-      .getProjectByName(projName)
-      .getToDos().length;
+    const taskNumber = document.querySelector(`.taskNumber-${projName}`);
+    taskNumber.textContent =
+      projectManager.getProjectByName(projName).taskCounter;
+    removePreviousForms();
   });
 
   buttonsDiv.appendChild(deleteButton);

@@ -80,7 +80,7 @@ export function printProjectNames() {
     ListProjectsInDOM.dataset.index = i;
 
     const taskNumber = document.createElement("span");
-    taskNumber.classList.add("taskNumber");
+    taskNumber.classList.add(`taskNumber-${project.name}`, 'taskNumber');
     taskNumber.textContent = projectManager
       .getProjectByName(project.name)
       .getToDos().length;
