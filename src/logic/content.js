@@ -1,6 +1,6 @@
 import "../styles/content.styles.css";
 
-import { updateCountToday } from "./sidebar";
+import { updateCountToday, updateCountUpcoming } from "./sidebar";
 import { addForm, blackOutDiv, removePreviousForms } from "./Form";
 import { projectManager } from "./projectManager";
 
@@ -72,6 +72,7 @@ function pullUpInfo(projName, task) {
     console.log(projName);
     projectManager.getProjectByName(projName).deleteToDo(task);
     updateCountToday();
+    updateCountUpcoming();
     updateContent(
       projName,
       projectManager.getProjectByName(projName).getToDos()

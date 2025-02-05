@@ -1,7 +1,7 @@
 import "../styles/form.styles.css";
 
 import { projectManager } from "./projectManager";
-import { printProjectNames, updateCountToday } from "./sidebar";
+import { printProjectNames, updateCountToday, updateCountUpcoming } from "./sidebar";
 import { updateContent } from "./content";
 
 export function getTodaysDate() {
@@ -11,6 +11,19 @@ export function getTodaysDate() {
   day = day < 10 ? `0${day}` : day;
   let formattedToday = `${year}-${month}-${day}`;
   return formattedToday;
+}
+
+export function getUpcomingDate(){
+  const today = new Date();
+  const upcomingWeek = new Date(today);
+  upcomingWeek.setDate(today.getDate() + 7);
+  let formattedUpcoming = upcomingWeek.toLocaleDateString().split("T")[0];
+  let [month, day, year] = formattedUpcoming.split("/");
+  month = month < 10 ? `0${month}` : month;
+  day = day < 10 ? `0${day}` : day;
+  formattedUpcoming = `${year}-${month}-${day}`;
+  //console.log(formattedUpcoming);
+  return formattedUpcoming;
 }
 
 export function blackOutDiv() {
@@ -256,6 +269,7 @@ function addNewTasks(task = null) {
       removePreviousForms();
       printProjectNames();
       if (dateInput.value === getTodaysDate()) updateCountToday();
+      if(dateInput.value >= getTodaysDate() && dateInput.value <= getUpcomingDate()) updateCountUpcoming();
     } else {
       nameError.style.opacity = "1";
       nameError.textContent = "Name is required.";
