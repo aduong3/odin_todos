@@ -54,8 +54,7 @@
 .todayDiv,
 .upcomingDiv,
 .addTaskDiv,
-.projectNav
-{
+.projectNav {
   display: grid;
   gap: 12px;
   cursor: pointer;
@@ -65,7 +64,7 @@
   grid-template-columns: 0.5fr 2fr 0.5fr;
 }
 
-.addTaskDiv{
+.addTaskDiv {
   color: var(--sidebar-color);
   fill: var(--sidebar-color);
 }
@@ -74,7 +73,7 @@
 .upcomingDiv:hover,
 .projectNav:hover,
 .addProjectButton:hover,
-.addTaskDiv:hover{
+.addTaskDiv:hover {
   background-color: rgba(71, 71, 71, 0.062);
   color: var(--sidebar-color);
 }
@@ -87,7 +86,7 @@
 .todayDiv p,
 .upcomingDiv p,
 .projectNav p,
-.addTaskButton{
+.addTaskButton {
   font-size: 1.2rem;
 }
 
@@ -97,23 +96,11 @@
 .todayDiv svg,
 .upcomingDiv svg,
 .projectNav svg,
-.addTaskDiv svg{
+.addTaskDiv svg {
   justify-self: right;
 }
 
-.menuIcon{
+.menuIcon {
   display: none;
   width: 30px;
-}
-
-.projectNav:hover .taskNumber{
-  display: none;
-}
-
-.projectNav:hover .menuIcon{
-  display: inline;
-}
-
-.menuIcon:hover{
-  fill: rgb(235, 106, 46);
 }

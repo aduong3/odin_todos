@@ -1,29 +1,49 @@
 import "../styles/content.styles.css";
 
-import { updateCountToday, updateCountUpcoming, getTodayTasks, getUpcomingTasks } from "./sidebar";
+import {
+  updateCountToday,
+  updateCountUpcoming,
+  getTodayTasks,
+  getUpcomingTasks,
+} from "./sidebar";
 import { addForm, blackOutDiv, removePreviousForms } from "./Form";
 import { projectManager } from "./projectManager";
 
-function deleteButtonCases(projName, task){
-  if(projName === 'Today' || projName === 'Upcoming'){
-    projectManager.getProjectsList.forEach((project) => {
+function deleteButtonCases(projName, task) {
+  let targetProject;
+
+    projectManager.getProjectsList().forEach((project) => {
       project.getToDos().forEach((todo) => {
-        if (todo.title === task.title && todo.dueDate === task.dueDate && todo.priority === task.priority){
+        if (
+          todo.title === task.title &&
+          todo.dueDate === task.dueDate &&
+          todo.priority === task.priority
+        ) {
           project.deleteToDo(todo);
+          targetProject = project.name;
         }
-      })
-    })
-    const tasks = projName === 'Today' ? getTodayTask() : getUpcomingTask();
+      });
+    });
+    if (projName === "Today" || projName === "Upcoming") {
+    const tasks = projName === "Today" ? getTodayTasks() : getUpcomingTasks();
     updateContent(projName, tasks);
   } else {
-    projectManager.getProjectByName(projName).deleteToDo(task);
-    updateContent(projName, projectManager.getProjectByName(projName).getToDos());
+    updateContent(
+      projName,
+      projectManager.getProjectByName(projName).getToDos()
+    );
   }
 
   updateCountToday();
   updateCountUpcoming();
-
-};
+  if ([targetProject !== "Today" && targetProject !== "Upcoming"]) {
+    //console.log(targetProject);
+    const taskNumber = document.querySelector(`.taskNumber-${targetProject}`);
+    taskNumber.textContent =
+      projectManager.getProjectByName(targetProject).taskCounter;
+    removePreviousForms();
+  }
+}
 
 function pullUpInfo(projName, task) {
   //console.log(task);
@@ -90,14 +110,10 @@ function pullUpInfo(projName, task) {
   deleteButton.classList.add("deleteTaskButton");
   deleteButton.textContent = "Delete";
   deleteButton.addEventListener("click", () => {
-    console.log(projName);
+    //console.log(projName);
     deleteButtonCases(projName, task);
     updateCountToday();
     updateCountUpcoming();
-    const taskNumber = document.querySelector(`.taskNumber-${projName}`);
-    taskNumber.textContent =
-      projectManager.getProjectByName(projName).taskCounter;
-    removePreviousForms();
   });
 
   buttonsDiv.appendChild(deleteButton);
@@ -113,6 +129,7 @@ export default function content() {
   contentContainer.classList.add("contentContainer");
 
   document.body.appendChild(contentContainer);
+  updateContent('Today', getTodayTasks());
 }
 
 export function updateContent(projName, toDos) {
@@ -125,7 +142,12 @@ export function updateContent(projName, toDos) {
   contentHeaderDiv.classList.add("contentHeaderDiv");
 
   const contentTitle = document.createElement("h2");
-  contentTitle.textContent = projName === 'Today' ? 'Today' : projName === 'Upcoming' ? 'Upcoming Week' : projName;
+  contentTitle.textContent =
+    projName === "Today"
+      ? "Today"
+      : projName === "Upcoming"
+      ? "Upcoming Week"
+      : projName;
   contentTitle.classList.add(projName);
 
   contentHeaderDiv.appendChild(contentTitle);
@@ -162,4 +184,5 @@ export function updateContent(projName, toDos) {
   });
 
   contentContainer.appendChild(contentToDoListDiv);
+
 }

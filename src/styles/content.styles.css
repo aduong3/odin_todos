@@ -70,18 +70,18 @@
   padding: 12px 24px;
 }
 
-.buttonsDiv{
+.buttonsDiv {
   display: flex;
   justify-content: space-evenly;
 }
 
-.buttonsDiv > *{
+.buttonsDiv > * {
   padding: 10px;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.buttonsDiv > *:hover{
+.buttonsDiv > *:hover {
   background-color: rgba(128, 128, 128, 0.267);
 }
