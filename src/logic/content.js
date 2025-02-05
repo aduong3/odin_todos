@@ -1,8 +1,29 @@
 import "../styles/content.styles.css";
 
-import { updateCountToday, updateCountUpcoming } from "./sidebar";
+import { updateCountToday, updateCountUpcoming, getTodayTasks, getUpcomingTasks } from "./sidebar";
 import { addForm, blackOutDiv, removePreviousForms } from "./Form";
 import { projectManager } from "./projectManager";
+
+function deleteButtonCases(projName, task){
+  if(projName === 'Today' || projName === 'Upcoming'){
+    projectManager.getProjectsList.forEach((project) => {
+      project.getToDos().forEach((todo) => {
+        if (todo.title === task.title && todo.dueDate === task.dueDate && todo.priority === task.priority){
+          project.deleteToDo(todo);
+        }
+      })
+    })
+    const tasks = projName === 'Today' ? getTodayTask() : getUpcomingTask();
+    updateContent(projName, tasks);
+  } else {
+    projectManager.getProjectByName(projName).deleteToDo(task);
+    updateContent(projName, projectManager.getProjectByName(projName).getToDos());
+  }
+
+  updateCountToday();
+  updateCountUpcoming();
+
+};
 
 function pullUpInfo(projName, task) {
   //console.log(task);
@@ -70,13 +91,9 @@ function pullUpInfo(projName, task) {
   deleteButton.textContent = "Delete";
   deleteButton.addEventListener("click", () => {
     console.log(projName);
-    projectManager.getProjectByName(projName).deleteToDo(task);
+    deleteButtonCases(projName, task);
     updateCountToday();
     updateCountUpcoming();
-    updateContent(
-      projName,
-      projectManager.getProjectByName(projName).getToDos()
-    );
     const taskNumber = document.querySelector(`.taskNumber-${projName}`);
     taskNumber.textContent =
       projectManager.getProjectByName(projName).taskCounter;
@@ -108,7 +125,7 @@ export function updateContent(projName, toDos) {
   contentHeaderDiv.classList.add("contentHeaderDiv");
 
   const contentTitle = document.createElement("h2");
-  contentTitle.textContent = projName;
+  contentTitle.textContent = projName === 'Today' ? 'Today' : projName === 'Upcoming' ? 'Upcoming Week' : projName;
   contentTitle.classList.add(projName);
 
   contentHeaderDiv.appendChild(contentTitle);
